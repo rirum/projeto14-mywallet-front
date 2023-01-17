@@ -6,12 +6,12 @@ export default function Signup(){
 <>
 <ContainerLogo>MyWallet</ContainerLogo>
 
-<LoginInput placeholder="Nome"></LoginInput>
-<LoginInput placeholder="E-mail"></LoginInput>
-<LoginInput placeholder="Senha"></LoginInput>
-<LoginInput placeholder="Confirme a senha"></LoginInput>
+<LoginInput data-test="name" placeholder="Nome"></LoginInput>
+<LoginInput data-test="email" placeholder="E-mail"></LoginInput>
+<LoginInput data-test="password" placeholder="Senha"></LoginInput>
+<LoginInput data-test="conf-password" placeholder="Confirme a senha"></LoginInput>
 
-<LoginButton>Cadastrar</LoginButton>
+<LoginButton data-test="sign-up-submit">Cadastrar</LoginButton>
 
 <Link to="/" style={{textDecoration:'none'}}>
 <ContainerSignUp>Já tem uma conta? Entre agora!</ContainerSignUp>

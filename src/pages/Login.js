@@ -8,8 +8,8 @@ export default function Login(){
             <h1> MyWallet</h1>
         </ContainerLogo>
 
-        <LoginInput data-teste="email" type="email" placeholder="E-mail" required/>
-        <LoginInput data-teste="password" type="password" placeholder="Senha" required/>
+        <LoginInput data-test="email" type="email" placeholder="E-mail" required/>
+        <LoginInput data-test="password" type="password" placeholder="Senha" required/>
 
         <LoginButton data-test="sign-in-submit">Entrar</LoginButton>
 
