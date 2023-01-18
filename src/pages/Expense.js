@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
-export default function Entry(){
+export default function Expense(){
     return(
     <>
     <StyledHeader>
-        <p>Nova entrada</p>
+        <p>Nova saída</p>
     </StyledHeader>
 
-    <EntryInput placeholder="Valor"/>
-    <EntryInput placeholder="Descrição"/>
-    <LoginButton>Salvar entrada</LoginButton>
+    <EntryInput data-test="registry-amount-input" placeholder="Valor"/>
+    <EntryInput data-test="registry-name-input" placeholder="Descrição"/>
+    <LoginButton data-test="registry-save">Salvar entrada</LoginButton>
     
     </>
     )
@@ -22,6 +22,7 @@ display: flex;
 justify-content: space-between;
 margin-top: 25px;
 margin-right: 24px;
+margin-bottom: 40px;
 p{
     margin-left: 24px;
     font-size: 26px;
