@@ -5,20 +5,24 @@ import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import Income from "./pages/Income";
 import Expense from "./pages/Expense";
+import AppProvider from "./AppContext/Provider";
 
 export default function App(){
     return (
         <BrowserRouter>
 
         <ContainerApp>
+            <AppProvider>
             <Routes>
             
             <Route path="/" element={<Login/>}/>
             <Route path="/cadastro" element={<Signup/>}/>
-            <Route path="/home" element={<Home/>}/>
+            {/* <Route path="/home" element={<Home/>}/>
             <Route path="/nova-entrada" element={<Income />}/>
-            <Route path="/nova-saida" element={<Expense />}/>
+            <Route path="/nova-saida" element={<Expense />}/> */}
             </Routes>
+
+            </AppProvider>
         </ContainerApp>
 
         </BrowserRouter>

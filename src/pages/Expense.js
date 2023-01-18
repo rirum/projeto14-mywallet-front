@@ -9,7 +9,7 @@ export default function Expense(){
 
     <EntryInput data-test="registry-amount-input" placeholder="Valor"/>
     <EntryInput data-test="registry-name-input" placeholder="Descrição"/>
-    <LoginButton data-test="registry-save">Salvar entrada</LoginButton>
+    <LoginButton data-test="registry-save">Salvar saída</LoginButton>
     
     </>
     )

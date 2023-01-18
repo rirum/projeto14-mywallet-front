@@ -42,7 +42,7 @@ font-size: 15px;
 &::placeholder{
     font-size:20px;
     color: #000;
-    padding-left: 15px;
+    padding-left: 10px;
 }
 `
 const LoginButton = styled.button`

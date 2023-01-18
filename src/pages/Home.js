@@ -77,25 +77,25 @@ p{
 }
 `
 
-const RegistryBoxEmpty = styled.div`
-width: 326px;
-height: 446px;
-background-color: #fff;
-border-radius: 5px;
-margin-top: 22px;
-display: flex;
-align-items: center;
-justify-content: center;
-p{
-    width: 180px;
-    height: 46px;
-    color: #868686;
-    font-size: 20px;
-    text-align: center;
+// const RegistryBoxEmpty = styled.div`
+// width: 326px;
+// height: 446px;
+// background-color: #fff;
+// border-radius: 5px;
+// margin-top: 22px;
+// display: flex;
+// align-items: center;
+// justify-content: center;
+// p{
+//     width: 180px;
+//     height: 46px;
+//     color: #868686;
+//     font-size: 20px;
+//     text-align: center;
    
-}
+// }
 
-`
+// `
 const RegistryBox = styled.div`
 width: 326px;
 height: 446px;
@@ -103,7 +103,6 @@ background-color: #fff;
 border-radius: 5px;
 margin-top: 22px;
 display: flex;
-
 position: relative;
 ::-webkit-scrollbar {
     width: 0px;
@@ -143,7 +142,8 @@ margin-left: 20px;
 `
 const StyleValue=styled.p`
 width: 70px;
-color: #C70000; //#03AC00
+color: #C70000;
+/* color-scheme: #03AC00; */
 `
 const WrapperBox = styled.div`
 display: flex;
@@ -192,5 +192,6 @@ const BalanceValue = styled.div`
 font-size: 17px;
 font-weight: 400;
 margin-right: 15px;
-color: #03AC00; //#C70000
+color: #03AC00; 
+/* color-scheme: #C70000; */
 `

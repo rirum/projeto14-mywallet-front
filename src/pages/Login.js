@@ -1,18 +1,38 @@
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
 
 export default function Login(){
+    const [ email, setEmail ] = useState("");
+    const [ password, setPassword ] = useState("");
+    const [ status, setStatus ] = useState(false); //travar botoes 
+
+    function signIn(event) {
+        event.preventDefault();
+        setStatus(true);
+
+        const object = {
+            email,
+            password,
+        }
+    }
+
+    //API + requisições!
+
+
     return(
         <>
         <ContainerLogo>
             <h1> MyWallet</h1>
         </ContainerLogo>
-
-        <LoginInput data-test="email" type="email" placeholder="E-mail" required/>
-        <LoginInput data-test="password" type="password" placeholder="Senha" required/>
-
-        <LoginButton data-test="sign-in-submit">Entrar</LoginButton>
-
+        <WrapperForm>
+        <form disabled={status} onSubmit={signIn}>
+        <LoginInput data-test="email" type="email" placeholder="E-mail" required disabled={status} value={email} onChange={e => setEmail(e.target.value)}/>
+        <LoginInput data-test="password" type="password" placeholder="Senha" required disabled={status} value={password} onChange={e => setPassword(e.target.value)}/>
+        
+        <LoginButton data-test="sign-in-submit" type="submit" disabled={status}>Entrar</LoginButton>
+        </form>
+        </WrapperForm>
 
         <Link to="/cadastro" style={{textDecoration:'none'}}>
         <ContainerSignUp>Primeira vez? Cadastre-se!</ContainerSignUp>
@@ -30,6 +50,13 @@ color: #fff;
 margin-top:159px;
 margin-bottom: 24px;
 `
+const WrapperForm = styled.div`
+width: 326px;
+display: flex;
+flex-direction: column;
+flex-wrap: wrap;
+`
+
 const LoginInput = styled.input`
 height: 58px;
 width: 326px;
@@ -43,7 +70,7 @@ font-size: 15px;
 &::placeholder{
     font-size:20px;
     color: #000;
-    padding-left: 15px;
+    padding-left: 10px;
 }
 `
 const LoginButton = styled.button`
@@ -56,6 +83,7 @@ color: #fff;
 font-size: 20px;
 margin-top: 13px;
 `
+
 const ContainerSignUp = styled.div`
 font-size: 15px;
 font-weight: 700;
