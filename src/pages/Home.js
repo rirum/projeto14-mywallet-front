@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { RiLogoutBoxRLine, RiAddCircleLine, RiIndeterminateCircleLine } from "react-icons/ri";
+import { RiLogoutBoxRLine, RiAddCircleLine, RiIndeterminateCircleLine,RiCloseLine } from "react-icons/ri";
 
 export default function Home(){
     return(
@@ -8,9 +8,44 @@ export default function Home(){
             <p>Olá, Fulano</p>
            <RiLogoutBoxRLine color="white" size={26}/>
         </StyledHeader>
-        <RegistryBox>
+
+        {/* <RegistryBoxEmpty>
             <p>Não há registros de entrada ou saída</p>
+           
+        </RegistryBoxEmpty> */}
+
+        <RegistryBox>
+        <EntryWrapper>
+
+                <Entry>
+                <StyleDate>30/11</StyleDate>
+                <StyleDescription>Compras churrascoooo</StyleDescription>
+                <WrapperValue>
+                <StyleValue>39,90</StyleValue> <RiCloseLine color="#C6C6C6"/>
+                </WrapperValue>
+                </Entry>
+
+
+
+
+        </EntryWrapper>
+
+
+
+
+
+
+
+                
+                <Balance>
+                    <p>Saldo</p>
+                    <BalanceValue>4856,09</BalanceValue>
+                </Balance>
+
+            
         </RegistryBox>
+
+
 
         <WrapperBox>
             <Box><RiAddCircleLine color="white" size={20}/> 
@@ -42,7 +77,7 @@ p{
 }
 `
 
-const RegistryBox = styled.div`
+const RegistryBoxEmpty = styled.div`
 width: 326px;
 height: 446px;
 background-color: #fff;
@@ -51,7 +86,6 @@ margin-top: 22px;
 display: flex;
 align-items: center;
 justify-content: center;
-
 p{
     width: 180px;
     height: 46px;
@@ -61,6 +95,55 @@ p{
    
 }
 
+`
+const RegistryBox = styled.div`
+width: 326px;
+height: 446px;
+background-color: #fff;
+border-radius: 5px;
+margin-top: 22px;
+display: flex;
+
+position: relative;
+::-webkit-scrollbar {
+    width: 0px;
+}
+`
+const EntryWrapper = styled.div`
+overflow-y: scroll;
+`
+const Entry=styled.div`
+width: 300px;
+margin-top:22px;
+margin-left: 12px;
+margin-right: 12px;
+margin-bottom: 20px;
+display: flex;
+justify-content: space-around;
+
+
+
+`
+
+const StyleDate = styled.p`
+width:48px;
+font-size: 16px;
+color: #c6c6c6;
+`
+const StyleDescription = styled.div`
+width: 160px;
+justify-content: flex-start;
+margin-left: 5px;
+word-break: break-word;
+`
+const WrapperValue = styled.div`
+display: flex;
+width: 90px;
+margin-left: 20px;
+`
+const StyleValue=styled.p`
+width: 70px;
+color: #C70000; //#03AC00
 `
 const WrapperBox = styled.div`
 display: flex;
@@ -83,4 +166,31 @@ p{
     width: 60px;
     font-weight: 700;
 }
+`
+
+const Balance = styled.div`
+width: 326px;
+height: 40px;
+background-color: #fff;
+display: flex;
+justify-content:space-between;
+position: absolute;
+align-items: center;
+bottom: 0;
+left: 0;
+
+z-index: 2;
+p{
+    margin-left: 15px;
+    font-size:17px;
+    font-weight: 700;
+    color: #000;
+}
+`
+
+const BalanceValue = styled.div`
+font-size: 17px;
+font-weight: 400;
+margin-right: 15px;
+color: #03AC00; //#C70000
 `
