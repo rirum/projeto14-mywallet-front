@@ -6,7 +6,7 @@ export default function Login(){
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
     const [ status, setStatus ] = useState(false); //travar botoes 
-
+   
     function signIn(event) {
         event.preventDefault();
         setStatus(true);
@@ -15,6 +15,8 @@ export default function Login(){
             email,
             password,
         }
+    
+
     }
 
     //API + requisições!
