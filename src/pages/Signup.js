@@ -25,7 +25,7 @@ export default function Signup(){
         }
 
         try {
-            const URL=('localhost:5000/user')
+            const URL=('localhost:5000/sign-up')
             const response =  axios.post((URL), object);
             console.log(response.data);
             navigate("/");
@@ -45,10 +45,10 @@ export default function Signup(){
 
 <WrapperForm>
 <form onSubmit={register}>
-<LoginInput data-test="name" type="text" placeholder="Nome" required onChange={e  => setName(e.target.value)}/>
-<LoginInput data-test="email" type="email" placeholder="E-mail" required onChange={e=> setEmail(e.target.value)}/>
-<LoginInput data-test="password" type="password" placeholder="Senha" required onChange={e => setPassword(e.target.value)}/>
-<LoginInput data-test="conf-password" type="password" placeholder="Confirme a senha" required onChange={e => setConfirmPassword(e.target.value)}/>
+<LoginInput disabled={status} data-test="name" type="text" placeholder="Nome" required onChange={e  => setName(e.target.value)}/>
+<LoginInput disabled={status} data-test="email" type="email" placeholder="E-mail" required onChange={e=> setEmail(e.target.value)}/>
+<LoginInput disabled={status} data-test="password" type="password" placeholder="Senha" required onChange={e => setPassword(e.target.value)}/>
+<LoginInput disabled={status} data-test="conf-password" type="password" placeholder="Confirme a senha" required onChange={e => setConfirmPassword(e.target.value)}/>
 
 <LoginButton data-test="sign-up-submit" state={status}>Cadastrar</LoginButton>
 </form>

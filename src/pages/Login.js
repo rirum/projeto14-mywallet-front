@@ -1,12 +1,17 @@
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
+import axios from "axios";
+
+
 
 export default function Login(){
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
     const [ status, setStatus ] = useState(false); //travar botoes 
    
+    const navigate = useNavigate();
+
     function signIn(event) {
         event.preventDefault();
         setStatus(true);
@@ -16,10 +21,20 @@ export default function Login(){
             password,
         }
     
+        try{
+            const URL=('localhost:5000/sign-in')
+            const response =  axios.post((URL), object);
+            console.log(response.data);
+            navigate("/Home");
+            
+        } catch (error) {
+            alert(error.response.data.message)
+            window.location.reload();    
+        }
 
     }
 
-    //API + requisições!
+   
 
 
     return(
