@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import axios from "axios";
+import AppContext from "../AppContext/Context";
 
 
 
@@ -9,6 +10,7 @@ export default function Login(){
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
     const [ status, setStatus ] = useState(false); //travar botoes 
+    const { setToken, setUser } = useContext(AppContext);
    
     const navigate = useNavigate();
 
@@ -20,17 +22,33 @@ export default function Login(){
             email,
             password,
         }
+        const URL=(`${process.env.REACT_APP_API_URL}/sign-in`)
+
+        axios.post(URL, { email: email, password: password })
+            .then((res) => {
+                setUser(res.data);
+                navigate('/home');
+            })
+            .catch(response => {
+                console.log(response);
+            });
     
-        try{
-            const URL=('localhost:5000/sign-in')
-            const response =  axios.post((URL), object);
-            console.log(response.data);
-            navigate("/Home");
+        // try{
+        //     const URL=(`${process.env.REACT_APP_API_URL}/sign-in`)
+        //     const response =  axios.post((URL), object);
+        //     console.log(response);
+        //     setToken(response.data.token);
+        //     setUser(response.data.name);
+        //     setStatus(false);
+        //     navigate("/Home")
             
-        } catch (error) {
-            alert(error.response.data.message)
-            window.location.reload();    
-        }
+        // } catch (error) {
+            
+        //         alert(error.response.data.message);
+        //         setStatus(true)
+            
+              
+        // }
 
     }
 
