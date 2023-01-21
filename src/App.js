@@ -18,8 +18,8 @@ export default function App(){
             <Route path="/" element={<Login/>}/>
             <Route path="/cadastro" element={<Signup/>}/>
             <Route path="/home" element={<Home/>}/>
-            {/* <Route path="/nova-entrada" element={<Income />}/>
-            <Route path="/nova-saida" element={<Expense />}/> */}
+            <Route path="/nova-entrada" element={<Income />}/>
+            <Route path="/nova-saida" element={<Expense />}/>
             </Routes>
 
             </AppProvider>

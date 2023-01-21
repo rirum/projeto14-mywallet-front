@@ -1,12 +1,19 @@
 import styled from "styled-components";
 import { RiLogoutBoxRLine, RiAddCircleLine, RiIndeterminateCircleLine,RiCloseLine } from "react-icons/ri";
+import { Link, useNavigate } from "react-router-dom";
+
 
 export default function Home(){
+
+const navigate = useNavigate();
+
     return(
         <>
         <StyledHeader>
             <p>Olá, Fulano</p>
+            <Link to="/">
            <RiLogoutBoxRLine color="white" size={26}/>
+           </Link>
         </StyledHeader>
 
         {/* <RegistryBoxEmpty>
@@ -48,13 +55,17 @@ export default function Home(){
 
 
         <WrapperBox>
-            <Box><RiAddCircleLine color="white" size={20}/> 
+            
+            <Box onClick={() => navigate("/nova-entrada")}><RiAddCircleLine color="white" size={20}/> 
             <p>Nova entrada</p>
             </Box>
-            <Box>
+            
+           
+            <Box onClick={() => navigate("/nova-saida")}>
             <RiIndeterminateCircleLine color="white" size={20}/>
             <p>Nova saída</p>
             </Box>
+            
         </WrapperBox>
         </>
     )

@@ -1,16 +1,31 @@
+import { useState, useNavigate } from "react";
 import styled from "styled-components";
 
 export default function Expense(){
+    const [value, setValue] = useState("");
+    const [description, setDescription] = useState("description");
+    const navigate = useNavigate()
+
+    function createExpense(e){
+        e.preventDefault();
+
+
+
+        // navigate("/home")
+    }
+
     return(
     <>
     <StyledHeader>
         <p>Nova saída</p>
     </StyledHeader>
-
-    <EntryInput data-test="registry-amount-input" placeholder="Valor"/>
-    <EntryInput data-test="registry-name-input" placeholder="Descrição"/>
-    <LoginButton data-test="registry-save">Salvar saída</LoginButton>
-    
+    <WrapperForm>
+        <form onSubmit={(e) => createExpense(e)}>
+    <EntryInput value={value} onChange={(e) => setValue(e.target.value)} data-test="registry-amount-input" placeholder="Valor" required/>
+    <EntryInput value={description} onChange={(e) => setDescription(e.target.value)} data-test="registry-name-input" placeholder="Descrição" required/>
+    <LoginButton type="submit" data-test="registry-save">Salvar saída</LoginButton>
+    </form>
+    </WrapperForm>
     </>
     )
 }
@@ -30,6 +45,13 @@ p{
     color: #fff;
 }
 `
+const WrapperForm = styled.div`
+width: 326px;
+display: flex;
+flex-direction: column;
+flex-wrap: wrap;
+`
+
 
 const EntryInput = styled.input`
 height: 58px;

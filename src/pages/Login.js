@@ -9,14 +9,14 @@ import AppContext from "../AppContext/Context";
 export default function Login(){
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
-    const [ status, setStatus ] = useState(false); //travar botoes 
+    // const [ status, setStatus ] = useState(false); //travar botoes 
     const { setToken, setUser } = useContext(AppContext);
    
     const navigate = useNavigate();
 
     function signIn(event) {
         event.preventDefault();
-        setStatus(true);
+        // setStatus(true);
 
         const object = {
             email,
@@ -26,13 +26,16 @@ export default function Login(){
 
         axios.post(URL, { email: email, password: password })
             .then((res) => {
+                setToken(res.data.token)
                 setUser(res.data);
                 navigate('/home');
-                setStatus(false);
+                // setStatus(false);
             })
             .catch(response => {
                 console.log(response);
-                return;
+                alert("Usuário ou senha incorretos!");
+                // setStatus(true);
+                
             });
     
         // try{
@@ -63,11 +66,11 @@ export default function Login(){
             <h1> MyWallet</h1>
         </ContainerLogo>
         <WrapperForm>
-        <form disabled={status} onSubmit={signIn}>
-        <LoginInput data-test="email" type="email" placeholder="E-mail" required disabled={status} value={email} onChange={e => setEmail(e.target.value)}/>
-        <LoginInput data-test="password" type="password" placeholder="Senha" required disabled={status} value={password} onChange={e => setPassword(e.target.value)}/>
+        <form onSubmit={signIn}>
+        <LoginInput data-test="email" type="email" placeholder="E-mail" required  value={email} onChange={e => setEmail(e.target.value)}/>
+        <LoginInput data-test="password" type="password" placeholder="Senha" required  value={password} onChange={e => setPassword(e.target.value)}/>
         
-        <LoginButton data-test="sign-in-submit" type="submit" disabled={status}>Entrar</LoginButton>
+        <LoginButton data-test="sign-in-submit" type="submit" >Entrar</LoginButton>
         </form>
         </WrapperForm>
 

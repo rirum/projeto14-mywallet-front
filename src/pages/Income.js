@@ -1,16 +1,28 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Entry(){
+const [value, setValue] = useState("");
+const [ description, setDescription] = useState("");
+const navigate = useNavigate();
+
+function createEntry(e){
+    e.preventDefault();
+}
+
     return(
     <>
     <StyledHeader>
         <p>Nova entrada</p>
     </StyledHeader>
-
-    <EntryInput data-test="registry-amount-input" placeholder="Valor"/>
-    <EntryInput data-test="registry-name-input" placeholder="Descrição"/>
-    <LoginButton data-test="registry-save">Salvar entrada</LoginButton>
-    
+    <WrapperForm>
+    <form onSubmit={(e) => createEntry(e)}>
+    <EntryInput value={value} onChange={e => setValue(e.target.value)} type="text" data-test="registry-amount-input" placeholder="Valor"/>
+    <EntryInput value={description} onChange={e=>setDescription(e.target.value)} type="text" data-test="registry-name-input" placeholder="Descrição"/>
+    <LoginButton type="submit" data-test="registry-save">Salvar entrada</LoginButton>
+    </form>
+    </WrapperForm>
     </>
     )
 }
@@ -29,6 +41,12 @@ p{
     font-weight: 700;
     color: #fff;
 }
+`
+const WrapperForm = styled.div`
+width: 326px;
+display: flex;
+flex-direction: column;
+flex-wrap: wrap;
 `
 
 const EntryInput = styled.input`
