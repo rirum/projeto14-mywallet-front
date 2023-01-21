@@ -1,17 +1,30 @@
 import { useState, useNavigate } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
-export default function Expense(){
+export default function Expense(token){
     const [value, setValue] = useState("");
     const [description, setDescription] = useState("description");
     const navigate = useNavigate()
 
-    function createExpense(e){
+    async function createExpense(e){
         e.preventDefault();
 
+        const URL=(`${process.env.REACT_APP_API_URL}/transactions`)
+        const body = { value, description, type:"entry"} // entradas e saidas
+        const configuration = { headers: {
+            Authorization: `Bearer ${token}`
+        }}
 
+        if (isNaN(Number(value))) return alert("Apenas números")
+        try {
+            await axios.post(URL, body, configuration);
+        } catch(err) {
+            alert (err.response.data)
+        }
 
         // navigate("/home")
+        
     }
 
     return(

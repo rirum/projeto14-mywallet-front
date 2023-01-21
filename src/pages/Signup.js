@@ -25,7 +25,7 @@ export default function Signup(){
         }
 
         try {
-            const URL=('localhost:5000/sign-up')
+            const URL=(`${process.env.REACT_APP_API_URL}/sign-up`)
             const response =  axios.post((URL), object);
             console.log(response.data);
             navigate("/");
