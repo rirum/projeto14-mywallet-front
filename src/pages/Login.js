@@ -28,9 +28,11 @@ export default function Login(){
             .then((res) => {
                 setUser(res.data);
                 navigate('/home');
+                setStatus(false);
             })
             .catch(response => {
                 console.log(response);
+                return;
             });
     
         // try{
