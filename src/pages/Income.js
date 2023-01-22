@@ -42,8 +42,8 @@ async function createEntry(e){
     </StyledHeader>
     <WrapperForm>
     <form onSubmit={(e) => createEntry(e)}>
-    <EntryInput value={value} onChange={e => setValue(e.target.value)} type="text" data-test="registry-amount-input" placeholder="Valor"/>
-    <EntryInput value={description} onChange={e=>setDescription(e.target.value)} type="text" data-test="registry-name-input" placeholder="Descrição"/>
+    <EntryInput value={value} onChange={e => setValue(e.target.value)} type="text" data-test="registry-amount-input" placeholder="Valor" required/>
+    <EntryInput value={description} onChange={e=>setDescription(e.target.value)} type="text" data-test="registry-name-input" placeholder="Descrição" required/>
     <LoginButton type="submit" data-test="registry-save">Salvar entrada</LoginButton>
     </form>
     </WrapperForm>
