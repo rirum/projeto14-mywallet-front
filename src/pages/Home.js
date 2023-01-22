@@ -58,7 +58,7 @@ export default function Home(){
 
         <RegistryBox>
             {transactions.length === 0 && (
-            <h1 data-test="">Não há registros de entrada ou saída</h1>
+            <h1 data-test="user-name">Não há registros de entrada ou saída</h1>
             )}
             {transactions.length > 0 &&
             transactions.map((trc) => (
