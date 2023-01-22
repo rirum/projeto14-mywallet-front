@@ -58,7 +58,7 @@ export default function Home(){
 
         <RegistryBox>
             {transactions.length === 0 && (
-            <h1>Não há registros de entrada ou saída</h1>
+            <h1 data-test="">Não há registros de entrada ou saída</h1>
             )}
             {transactions.length > 0 &&
             transactions.map((trc) => (
@@ -66,7 +66,7 @@ export default function Home(){
                 <StyleDate>{trc.date}</StyleDate>
                 <StyleDescription data-test="registry-name">{trc.description}</StyleDescription>
                 <WrapperValue>
-                <StyleValue type={trc.type} data-test="registry-amount">{trc.value}</StyleValue> {" "}<RiCloseLine color="#C6C6C6"/>
+                <StyleValue type={trc.type} data-test="registry-amount">{trc.value}</StyleValue> {" "}
                 </WrapperValue>
                 </Entry>
 
@@ -150,7 +150,7 @@ h1{
 // overflow-y: scroll;
 // `
 const Entry=styled.div`
-width: 300px;
+width: 330px;
 margin-top:22px;
 margin-left: 12px;
 margin-right: 12px;
