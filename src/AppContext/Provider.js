@@ -4,10 +4,11 @@ import { useState } from "react";
 
 export default function AppProvider({children}){
 
-    const [ token, setToken ] = useState('');
+
     const [user, setUser ] = useState({
         email: "",
         password: "",
+        token: "",
     })
  
     return(
