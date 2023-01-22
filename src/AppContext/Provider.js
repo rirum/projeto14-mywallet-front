@@ -12,7 +12,7 @@ export default function AppProvider({children}){
     })
  
     return(
-        <AppContext.Provider value={{user, setUser, token, setToken}}>
+        <AppContext.Provider value={{user, setUser}}>
             {children}
         </AppContext.Provider>
     )

@@ -1,29 +1,37 @@
-import { useState, useNavigate } from "react";
+import { useNavigate } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import AppContext from "../AppContext/Context";
 
 export default function Expense(token){
     const [value, setValue] = useState("");
     const [description, setDescription] = useState("description");
     const navigate = useNavigate()
+    const {user}= useContext(AppContext);
 
     async function createExpense(e){
         e.preventDefault();
 
-        const URL=(`${process.env.REACT_APP_API_URL}/transactions`)
-        const body = { value, description, type:"entry"} // entradas e saidas
+        const URL=(`${process.env.REACT_APP_API_URL}/transaction`)
+        const body = { value, description, type:"expense"} 
         const configuration = { headers: {
             Authorization: `Bearer ${token}`
-        }}
+        }};
 
         if (isNaN(Number(value))) return alert("Apenas números")
-        try {
-            await axios.post(URL, body, configuration);
-        } catch(err) {
-            alert (err.response.data)
-        }
+   
 
-        // navigate("/home")
+        axios
+        .post(URL, body, configuration)
+        .then((response) => {
+            alert("Saída adicionada com sucesso!");
+            navigate("/home");
+        })
+        .catch((error) =>{
+            alert(error.response.data);
+        })
+       
         
     }
 

@@ -1,29 +1,36 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import AppContext from "../AppContext/Context";
 
 export default function Entry(token){
 const [value, setValue] = useState("");
 const [ description, setDescription] = useState("");
 const navigate = useNavigate();
+const {user} = useContext(AppContext);
 
 async function createEntry(e){
     e.preventDefault();
 
-    const URL=(`${process.env.REACT_APP_API_URL}/transactions`)
-    const body = { value, description, type:"entry"} // entradas e saidas
+    const URL=(`${process.env.REACT_APP_API_URL}/transaction`)
+    const body = { value, description, type:"entry"} 
     const configuration = { headers: {
-        Authorization: `Bearer ${token}`
-    }}
+        Authorization: `Bearer ${user.token}`
+    },
+};
 
     if (isNaN(Number(value))) return alert("Apenas números")
 
-    try {
-        await axios.post(URL, body, configuration);
-    } catch(err) {
-        alert (err.response.data)
-    }
+    axios
+    .post(URL,body, configuration)
+    .then((response) => {
+        alert("Entrada adicionada com sucesso!");
+        navigate("/home");
+    })
+    .catch((error) => {
+        alert(error.response.data);
+    });
 
     
 }

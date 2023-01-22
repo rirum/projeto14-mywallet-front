@@ -1,53 +1,83 @@
 import styled from "styled-components";
+import { useContext, useState, useEffect } from "react";
 import { RiLogoutBoxRLine, RiAddCircleLine, RiIndeterminateCircleLine,RiCloseLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
+import AppContext from "../AppContext/Context";
+import axios from "axios";
 
 
 export default function Home(){
+    const [ transactions, setTransactions ] = useState([]);
+    const [balanceValue, setBalanceValue] = useState(0);
+    const { user, setUser} = useContext(AppContext);
+    const navigate = useNavigate();
 
-const navigate = useNavigate();
+    useEffect(() => {
+        const URL = `${process.env.REACT_APP_API_URL}/transactions`;
+        const configuration = {
+            headers: {
+                Authorization: `Bearer ${user.token}`
+            },
+        };
 
+        axios
+        .get(URL, configuration)
+        .then((response) => {
+            setBalanceValue(response.data.totalBalance);
+            setTransactions(response.data.transactions);
+        })
+        .catch((error) => {
+            setTransactions([]);
+            alert(error);
+            navigate("/");
+        });
+    }, [user, navigate,setTransactions,setBalanceValue]);
+
+
+    const onLogout = () => {
+        setUser(null);
+        navigate("/");
+    }
     return(
         <>
         <StyledHeader>
-            <p>Olá, Fulano</p>
+
+            <p>Olá, {user.name}</p>
+            
             <Link to="/">
+            <button className="no-style" type="button" data-test="logout" onClick={onLogout}>
            <RiLogoutBoxRLine color="white" size={26}/>
+           </button>
            </Link>
         </StyledHeader>
 
         {/* <RegistryBoxEmpty>
-            <p>Não há registros de entrada ou saída</p>
+           
            
         </RegistryBoxEmpty> */}
 
         <RegistryBox>
-        <EntryWrapper>
-
+            {transactions.length === 0 && (
+            <p>Não há registros de entrada ou saída</p>
+            )}
+            {transactions.length > 0 &&
+            transactions.map((trc) => (
                 <Entry>
-                <StyleDate>30/11</StyleDate>
-                <StyleDescription>Compras churrascoooo</StyleDescription>
+                <StyleDate>{trc.date}</StyleDate>
+                <StyleDescription data-test="registry-name">{trc.description}</StyleDescription>
                 <WrapperValue>
-                <StyleValue>39,90</StyleValue> <RiCloseLine color="#C6C6C6"/>
+                <StyleValue type={trc.type} data-test="registry-amount">{trc.value}</StyleValue> {" "}<RiCloseLine color="#C6C6C6"/>
                 </WrapperValue>
                 </Entry>
 
-
-
-
-        </EntryWrapper>
-
-
-
-
-
-
-
-                
-                <Balance>
-                    <p>Saldo</p>
-                    <BalanceValue>4856,09</BalanceValue>
-                </Balance>
+            ))}
+                {transactions.length > 0 && (
+                            <Balance>
+                            <p>Saldo</p>
+                            <BalanceValue data-test="total-amount" total={balanceValue}>{balanceValue}</BalanceValue>
+                            </Balance>
+                )}            
+               
 
             
         </RegistryBox>
@@ -56,12 +86,12 @@ const navigate = useNavigate();
 
         <WrapperBox>
             
-            <Box onClick={() => navigate("/nova-entrada")}><RiAddCircleLine color="white" size={20}/> 
+            <Box data-test="new-income" onClick={() => navigate("/nova-entrada")}><RiAddCircleLine color="white" size={20}/> 
             <p>Nova entrada</p>
             </Box>
             
            
-            <Box onClick={() => navigate("/nova-saida")}>
+            <Box data-test="new-expense" onClick={() => navigate("/nova-saida")}>
             <RiIndeterminateCircleLine color="white" size={20}/>
             <p>Nova saída</p>
             </Box>
