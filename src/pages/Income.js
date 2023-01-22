@@ -13,7 +13,7 @@ const {user} = useContext(AppContext);
 async function createEntry(e){
     e.preventDefault();
 
-    const URL=(`${process.env.REACT_APP_API_URL}/transaction`)
+    const URL=`${process.env.REACT_APP_API_URL}/transaction`;
     const body = { value, description, type:"entry"} 
     const configuration = { headers: {
         Authorization: `Bearer ${user.token}`

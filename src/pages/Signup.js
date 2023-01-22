@@ -25,7 +25,7 @@ export default function Signup(){
         }
 
         
-            const URL=(`${process.env.REACT_APP_API_URL}/sign-up`)
+            const URL=`${process.env.REACT_APP_API_URL}/sign-up`;
 
             axios
             .post((URL), object)

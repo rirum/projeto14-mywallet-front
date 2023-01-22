@@ -9,14 +9,14 @@ import AppContext from "../AppContext/Context";
 export default function Login(){
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
-    const { setToken, setUser } = useContext(AppContext);
+    const { setUser } = useContext(AppContext);
    
     const navigate = useNavigate();
 
     function signIn(event) {
         event.preventDefault();
        
-        const URL=(`${process.env.REACT_APP_API_URL}/sign-in`)
+        const URL=`${process.env.REACT_APP_API_URL}/sign-in`;
 
         axios.post(URL, { email: email, password: password })
             .then((res) => {
@@ -26,10 +26,10 @@ export default function Login(){
                     token: res.data.token,
                 }
                 setUser(loggedUser);
-                navigate('/home');
+                navigate("/home");
              
             })
-            .catch(error => {
+            .catch((error) => {
                alert("Usuário ou senha incorretos!");
             });
 

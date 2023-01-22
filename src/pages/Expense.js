@@ -1,4 +1,4 @@
-import { useNavigate } from "react";
+import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
@@ -6,20 +6,22 @@ import AppContext from "../AppContext/Context";
 
 export default function Expense(token){
     const [value, setValue] = useState("");
-    const [description, setDescription] = useState("description");
+    const [description, setDescription] = useState("");
     const navigate = useNavigate()
     const {user}= useContext(AppContext);
 
     async function createExpense(e){
         e.preventDefault();
 
-        const URL=(`${process.env.REACT_APP_API_URL}/transaction`)
-        const body = { value, description, type:"expense"} 
-        const configuration = { headers: {
-            Authorization: `Bearer ${token}`
-        }};
+        const URL=`${process.env.REACT_APP_API_URL}/transaction`;
+        const body = { value, description, type:"expense"} ;
+        const configuration = { 
+            headers: {
+            Authorization: `Bearer ${user.token}`
+        }
+    };
 
-        if (isNaN(Number(value))) return alert("Apenas números")
+        if (isNaN(Number(value))) return alert("Apenas números");
    
 
         axios

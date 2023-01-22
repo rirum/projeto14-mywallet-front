@@ -45,9 +45,9 @@ export default function Home(){
             <p>Olá, {user.name}</p>
             
             <Link to="/">
-            <button className="no-style" type="button" data-test="logout" onClick={onLogout}>
+            <ButtonLogout className="no-style" type="button" data-test="logout" onClick={onLogout}>
            <RiLogoutBoxRLine color="white" size={26}/>
-           </button>
+           </ButtonLogout>
            </Link>
         </StyledHeader>
 
@@ -58,7 +58,7 @@ export default function Home(){
 
         <RegistryBox>
             {transactions.length === 0 && (
-            <p>Não há registros de entrada ou saída</p>
+            <h1>Não há registros de entrada ou saída</h1>
             )}
             {transactions.length > 0 &&
             transactions.map((trc) => (
@@ -118,25 +118,11 @@ p{
 }
 `
 
-// const RegistryBoxEmpty = styled.div`
-// width: 326px;
-// height: 446px;
-// background-color: #fff;
-// border-radius: 5px;
-// margin-top: 22px;
-// display: flex;
-// align-items: center;
-// justify-content: center;
-// p{
-//     width: 180px;
-//     height: 46px;
-//     color: #868686;
-//     font-size: 20px;
-//     text-align: center;
-   
-// }
+const ButtonLogout = styled.button`
+background-color: #8C11BE;
+border: 1px solid #8C11BE;
+`
 
-// `
 const RegistryBox = styled.div`
 width: 326px;
 height: 446px;
@@ -144,14 +130,25 @@ background-color: #fff;
 border-radius: 5px;
 margin-top: 22px;
 display: flex;
+flex-direction: column;
 position: relative;
+overflow: auto;
 ::-webkit-scrollbar {
     width: 0px;
 }
+h1{
+    width: 180px;
+    height: 46px;
+    color: #868686;
+    font-size: 20px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 200px;
+}
 `
-const EntryWrapper = styled.div`
-overflow-y: scroll;
-`
+// const EntryWrapper = styled.div`
+// overflow-y: scroll;
+// `
 const Entry=styled.div`
 width: 300px;
 margin-top:22px;
@@ -160,9 +157,6 @@ margin-right: 12px;
 margin-bottom: 20px;
 display: flex;
 justify-content: space-around;
-
-
-
 `
 
 const StyleDate = styled.p`
@@ -183,8 +177,8 @@ margin-left: 20px;
 `
 const StyleValue=styled.p`
 width: 70px;
-color: #C70000;
-/* color-scheme: #03AC00; */
+color: ${(props) => (props.type === "entry" ? "#03AC00" : "#c70000")};
+
 `
 const WrapperBox = styled.div`
 display: flex;
@@ -215,24 +209,25 @@ height: 40px;
 background-color: #fff;
 display: flex;
 justify-content:space-between;
-position: absolute;
+position: sticky;
 align-items: center;
 bottom: 0;
 left: 0;
-
-z-index: 2;
 p{
+    height: 30px;
     margin-left: 15px;
     font-size:17px;
     font-weight: 700;
+    text-align: center;
     color: #000;
 }
 `
 
 const BalanceValue = styled.div`
+height: 30px;
 font-size: 17px;
 font-weight: 400;
 margin-right: 15px;
-color: #03AC00; 
-/* color-scheme: #C70000; */
+color: ${(props) => (props.total > 0 ? "#03ac00" : "#c70000")}; 
+
 `
