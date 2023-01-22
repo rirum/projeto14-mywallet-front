@@ -9,51 +9,29 @@ import AppContext from "../AppContext/Context";
 export default function Login(){
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
-    // const [ status, setStatus ] = useState(false); //travar botoes 
     const { setToken, setUser } = useContext(AppContext);
    
     const navigate = useNavigate();
 
     function signIn(event) {
         event.preventDefault();
-        // setStatus(true);
-
-        const object = {
-            email,
-            password,
-        }
+       
         const URL=(`${process.env.REACT_APP_API_URL}/sign-in`)
 
         axios.post(URL, { email: email, password: password })
             .then((res) => {
-                setToken(res.data.token)
-                setUser(res.data);
+                const loggedUser ={
+                    name: res.data.user.name,
+                    email: email,
+                    token: res.data.token,
+                }
+                setUser(loggedUser);
                 navigate('/home');
-                // setStatus(false);
+             
             })
-            .catch(response => {
-                console.log(response);
-                alert("Usuário ou senha incorretos!");
-                // setStatus(true);
-                
+            .catch(error => {
+               alert("Usuário ou senha incorretos!");
             });
-    
-        // try{
-        //     const URL=(`${process.env.REACT_APP_API_URL}/sign-in`)
-        //     const response =  axios.post((URL), object);
-        //     console.log(response);
-        //     setToken(response.data.token);
-        //     setUser(response.data.name);
-        //     setStatus(false);
-        //     navigate("/Home")
-            
-        // } catch (error) {
-            
-        //         alert(error.response.data.message);
-        //         setStatus(true)
-            
-              
-        // }
 
     }
 

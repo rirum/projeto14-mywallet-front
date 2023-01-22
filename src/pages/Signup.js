@@ -24,20 +24,21 @@ export default function Signup(){
             confirmPassword
         }
 
-        try {
+        
             const URL=(`${process.env.REACT_APP_API_URL}/sign-up`)
-            const response =  axios.post((URL), object);
-            console.log(response.data);
-            navigate("/");
-            
-        } catch (error) {
-            alert(error.response.data.message)
-            window.location.reload();    
+
+            axios
+            .post((URL), object)
+            .then((value) => {
+                navigate("/");
+                alert("Usuário cadastrado com sucesso!");
+            }) 
+            .catch((error) => {
+                alert(error.message);
+                window.location.reload();   
+            })
         }
-    }
-
-
-   
+    
 
     return(
 <>
@@ -50,7 +51,7 @@ export default function Signup(){
 <LoginInput disabled={status} data-test="password" type="password" placeholder="Senha" required onChange={e => setPassword(e.target.value)}/>
 <LoginInput disabled={status} data-test="conf-password" type="password" placeholder="Confirme a senha" required onChange={e => setConfirmPassword(e.target.value)}/>
 
-<LoginButton data-test="sign-up-submit" state={status}>Cadastrar</LoginButton>
+<LoginButton type="submit" data-test="sign-up-submit" disabled={status}>Cadastrar</LoginButton>
 </form>
 </WrapperForm>
 
@@ -58,7 +59,7 @@ export default function Signup(){
 <ContainerSignUp>Já tem uma conta? Entre agora!</ContainerSignUp>
 </Link>
 </>
-    )
+    );
 }
 
 
